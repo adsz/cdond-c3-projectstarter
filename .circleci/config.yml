@@ -155,6 +155,12 @@ jobs:
       #           --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
       #           --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
+          name: Show back-end ip
+          command: |
+              aws ec2 describe-instances \
+                  --query 'Reservations[*].Instances[*].PublicIpAddress' \
+                  --output text
+      - run:
           name: Add back-end ip to ansible inventory
           command: |
               aws ec2 describe-instances \
