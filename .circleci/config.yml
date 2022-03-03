@@ -181,16 +181,16 @@ jobs:
                 fingerprints: ["e2:98:99:89:88:9c:29:34:9b:c0:64:f4:68:da:6b:c88"] 
       # Add ssh keys with fingerprint
       # attach workspace
-        - attach_workspace:
-              at: ~/      
-        - run:
-            name: Install Ansible
-            command: |
-              apk add --update ansible
-        - run:
-            name: Run Playbook and Configure server
-            command: |
-              ansible-playbook -i inventory.txt configure.server.yml
+      - attach_workspace:
+            at: ~/      
+      - run:
+          name: Install Ansible
+          command: |
+            apk add --update ansible
+      - run:
+          name: Run Playbook and Configure server
+          command: |
+            ansible-playbook -i inventory.txt configure.server.yml
       - run:
           name: Install dependencies
           command: |
