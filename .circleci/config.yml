@@ -196,7 +196,6 @@ jobs:
           command: |
             ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
       # Here's where you will add some code to rollback on failure      
-
   run-migrations:
     docker:
       - image: circleci/node:13.8.0
@@ -222,6 +221,33 @@ jobs:
             fi
      # Here's where you will add some code to rollback on failure      
 
+  deploy-frontend:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      # Checkout code from git
+      - checkout
+      - attach_workspace:
+      at: ~/      
+      - run:
+          name: Install dependencies
+          command: |
+            # your code here
+            ls -ltrh ~/
+      # - run:
+      #     name: Get backend url
+      #     command: |
+      #       # your code here
+      #       export API_URL="http://${BACKEND_IP}:3030"
+      #       echo "${API_URL}"
+
+            
+      # - run:
+      #     name: Deploy frontend objects
+      #     command: |
+      #       # your code here
+      # Here's where you will add some code to rollback on failure 
+
 workflows:
   default:
     jobs:
@@ -244,11 +270,11 @@ workflows:
       #     filters:
       #       branches:
       #         only: [test-feature-branch]
-      - configure-infrastructure
+      # - configure-infrastructure
       #     requires: [deploy-infrastructure]
-      - run-migrations
+      # - run-migrations
       #     requires: [configure-infrastructure]
-      # - deploy-frontend:
+      - deploy-frontend
       #     requires: [run-migrations]
       # - deploy-backend:
       #     requires: [run-migrations]
