@@ -234,7 +234,7 @@ jobs:
           name: Install dependencies
           command: |
             # your code here
-            ls -ltrh ~/
+            find ~/project -type f
       # - run:
       #     name: Get backend url
       #     command: |
