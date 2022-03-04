@@ -231,10 +231,17 @@ jobs:
       - attach_workspace:
             at: ~/      
       - run:
-          name: Install dependencies
+          name: Install dependencies 1
           command: |
-            # your code here
-            cat .circleci/ansible/inventory.txt
+            yum install -y python3 ansible
+      - run:
+          name: Install dependencies 2
+          command: |
+            yum install -y awscli
+        - run:
+          name: Install dependencies 3
+          command: |
+            yum install -y nodejs
       # - run:
       #     name: Get backend url
       #     command: |
