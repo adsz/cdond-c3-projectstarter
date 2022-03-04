@@ -234,7 +234,8 @@ jobs:
           name: Install dependencies 1
           command: |
               cat /etc/issue
-              cat /etc/redhat-release
+              uname -a
+              cat /etc/*release
               # yum install -y epel-release
               yum install -y tar gzip ansible nodejs npm python3 
       - run:
