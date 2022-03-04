@@ -236,9 +236,9 @@ jobs:
               cat /etc/*release
               curl -sL https://rpm.nodesource.com/setup_lts.x | bash -
               yum -y install nodejs
-              # npm install -g npm
-              # npm install oauth2
-              # npm install webpack
+              npm install -g npm
+              npm install oauth2
+              npm install webpack
       - run:
           name: Install awscli
           command: |
@@ -258,9 +258,9 @@ jobs:
           command: |
               cd frontend
               # npm install
-              npm run build
-              tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
-              aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive        
+              # npm run build
+              # tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
+              # aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive        
            
       # - run:
       #     name: Deploy frontend objects
