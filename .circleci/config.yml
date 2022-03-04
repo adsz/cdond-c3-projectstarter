@@ -233,11 +233,10 @@ jobs:
       - run:
           name: Install dependencies 1
           command: |
-              cat /etc/issue
-              uname -a
               cat /etc/*release
-              # yum install -y epel-release
-              yum install -y tar gzip ansible nodejs npm python3 
+              curl -sL https://rpm.nodesource.com/setup_lts.x | bash -
+              yum -y install nodejs
+              npm install -g npm
       - run:
           name: Install awscli
           command: |
