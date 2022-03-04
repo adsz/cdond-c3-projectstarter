@@ -11,8 +11,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            # Your code here
-            exit 1
+              aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
+              aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
+            
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -170,17 +171,14 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      # Here's where you will add some code to rollback on failure     
+      - destroy-environment     
   configure-infrastructure:
     docker:
         - image: python:3.7-alpine3.11
     steps:
       - checkout
       - add_ssh_keys:
-                # You can get this ID in the section where you registered the SSH Key
                 fingerprints: ["e2:98:99:89:88:9c:29:34:9b:c0:64:f4:68:da:6b:c88"] 
-      # Add ssh keys with fingerprint
-      # attach workspace
       - attach_workspace:
             at: ~/      
       # - run:
@@ -195,7 +193,7 @@ jobs:
           name: Run Playbook and Configure server
           command: |
             ansible-playbook -i inventory.txt .circleci/ansible/configure-server.yml
-      # Here's where you will add some code to rollback on failure      
+      - destroy-environment       
   run-migrations:
     docker:
       - image: circleci/node:13.8.0
@@ -261,9 +259,42 @@ jobs:
               npm run build
               tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
               aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive        
-
+      - destroy-environment  
       # Here's where you will add some code to rollback on failure 
-
+  deploy-backend:
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      # Checkout code from git
+      - checkout
+      - run: yum install -y tar gzip
+      - attach_workspace:
+            at: ~/      
+      - run:
+          name: Install dependencies
+          command: |
+              curl -sL https://rpm.nodesource.com/setup_lts.x | bash -
+              yum -y install nodejs
+              npm install -g npm
+              npm install oauth2
+              npm install webpack
+      - run:
+          name: Install awscli
+          command: |
+              yum install -y awscli
+      - run:
+          name: Deploy backend
+          command: |
+              cd backend
+              npm i
+              npm run build
+              cd ..
+              # Zip the directory
+              tar -C backend -czvf artifact.tar.gz .
+              cd .circleci/ansible
+              echo "Contents  of the inventory.txt file is -------"
+              cat inventoryXXX.txt
+      - destroy-environment  
 workflows:
   default:
     jobs:
