@@ -238,7 +238,7 @@ jobs:
           name: Install dependencies 2
           command: |
             yum install -y awscli
-        - run:
+      - run:
           name: Install dependencies 3
           command: |
             yum install -y nodejs
