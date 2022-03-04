@@ -230,18 +230,15 @@ jobs:
       - run: yum install -y tar gzip
       - attach_workspace:
             at: ~/      
-      # - run:
-      #     name: Install dependencies 1
-      #     command: |
-      #         yum install -y python3 ansible
-      # - run:
-      #     name: Install awscli
-      #     command: |
-      #         yum install -y awscli
-      # - run:
-      #     name: Install dependencies 3
-      #     command: |
-      #         yum install -y nodejs
+      - run:
+          name: Install dependencies 1
+          command: |
+              yum install -y epel-release
+              yum install -y tar gzip ansible nodejs npm python3 
+      - run:
+          name: Install awscli
+          command: |
+              yum install -y awscli
       - run:
           name: Get backend url
           command: |
@@ -260,8 +257,7 @@ jobs:
               npm run build
               tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
               aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive        
-
-            
+           
       # - run:
       #     name: Deploy frontend objects
       #     command: |
