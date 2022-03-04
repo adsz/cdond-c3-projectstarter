@@ -242,9 +242,9 @@ jobs:
       #     name: Install dependencies 3
       #     command: |
       #         yum install -y nodejs
-      # - run:
-      #     name: Get backend url
-      #     command: |
+      - run:
+          name: Get backend url
+          command: |
               aws ec2 describe-instances \
               --query "Reservations[*].Instances[*].PublicIpAddress" \
               --output=text
