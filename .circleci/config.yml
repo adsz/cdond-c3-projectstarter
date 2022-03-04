@@ -233,15 +233,15 @@ jobs:
       - run:
           name: Install dependencies 1
           command: |
-            yum install -y python3 ansible
-
+              yum install -y python3 ansible
+      - run:
           name: Install dependencies 2
           command: |
-            yum install -y awscli
-
+              yum install -y awscli
+      - run:
           name: Install dependencies 3
           command: |
-            yum install -y nodejs
+              yum install -y nodejs
       # - run:
       #     name: Get backend url
       #     command: |
