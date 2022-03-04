@@ -230,14 +230,14 @@ jobs:
       - run: yum install -y tar gzip
       - attach_workspace:
             at: ~/      
-      - run:
-          name: Install dependencies 1
-          command: |
-              yum install -y python3 ansible
-      - run:
-          name: Install dependencies 2
-          command: |
-              yum install -y awscli
+      # - run:
+      #     name: Install dependencies 1
+      #     command: |
+      #         yum install -y python3 ansible
+      # - run:
+      #     name: Install awscli
+      #     command: |
+      #         yum install -y awscli
       # - run:
       #     name: Install dependencies 3
       #     command: |
