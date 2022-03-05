@@ -293,7 +293,7 @@ jobs:
               tar -C backend -czvf artifact.tar.gz .
               cd .circleci/ansible
               echo "Contents  of the inventory.txt file is -------"
-              cat inventoryXXX.txt
+              cat inventory.txt
       - destroy-environment  
 workflows:
   default:
@@ -323,8 +323,8 @@ workflows:
           requires: [configure-infrastructure]
       - deploy-frontend:
           requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
