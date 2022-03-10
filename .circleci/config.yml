@@ -301,7 +301,7 @@ jobs:
       - destroy-environment  
   smoke-test:
     docker:
-        - image: python:3.7-alpine3.11
+        - image: alpine:latest
     steps:
       - checkout  
       - run:
