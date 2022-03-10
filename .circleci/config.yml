@@ -307,7 +307,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-              apk add --update curl
+              apk add --update curl awscli
       - run:
           name: Get backend url
           command: |
