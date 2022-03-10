@@ -314,9 +314,7 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              export BACKEND_IP=$(aws ec2 describe-instances \
-              --query "Reservations[*].Instances[*].PublicIpAddress" \
-              --output=text)
+              export BACKEND_IP=$(cat inventory.txt)
               
       - run:
           name: Backend smoke test.
