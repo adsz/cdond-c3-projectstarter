@@ -189,9 +189,12 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update tar gzip ansible
+            pip install awscli
       - run:
           name: Show inventory.txt from workspace
           command: |
+            pwd
+            find . -type f
             cat ~/inventory.txt
       - run:
           name: Run Playbook and Configure server
