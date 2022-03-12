@@ -314,7 +314,8 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              export BACKEND_IP=$(cat inventory.txt)
+              find . -type f -name inventory.txt
+              export BACKEND_IP=$(cat project/.circleci/ansible/inventory.txt)
               
       - run:
           name: Backend smoke test.
@@ -337,22 +338,22 @@ jobs:
 workflows:
   default:
     jobs:
-      - build-frontend:
-          context:
-            - Slack
-      - build-backend:
-         context:
-            - Slack
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+      # - build-frontend:
+      #     context:
+      #       - Slack
+      # - build-backend:
+      #    context:
+      #       - Slack
+      # - test-frontend:
+      #     requires: [build-frontend]
+      # - test-backend:
+      #     requires: [build-backend]
+      # - scan-backend:
+      #     requires: [build-backend]
+      # - scan-frontend:
+      #     requires: [build-frontend]
+      - deploy-infrastructure
+          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
           # filters:
           #   branches:
           #     only: [test-feature-branch]
