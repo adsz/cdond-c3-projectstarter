@@ -6,6 +6,10 @@ commands:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
       # Add parameter here   
+    docker:
+      - image: amazon/aws-cli
+    steps:
+      - checkout
     steps:
       - run:
           name: Destroy environments
@@ -192,7 +196,7 @@ jobs:
       - run:
           name: Show inventory.txt from workspace
           command: |
-            cat inventory.txt
+            cat ~/inventory.txt
       - run:
           name: Run Playbook and Configure server
           command: |
