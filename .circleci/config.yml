@@ -10,7 +10,6 @@ commands:
       - image: amazon/aws-cli
     steps:
       - checkout
-    steps:
       - run:
           name: Destroy environments
           when: on_fail
