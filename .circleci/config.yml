@@ -190,6 +190,10 @@ jobs:
           command: |
             apk add --update tar gzip ansible
       - run:
+          name: Show inventory.txt from workspace
+          command: |
+            cat inventory.txt
+      - run:
           name: Run Playbook and Configure server
           command: |
             ansible-playbook -i inventory.txt .circleci/ansible/configure-server.yml
@@ -332,7 +336,7 @@ jobs:
       #     name: Frontend smoke test.
       #     command: |
             # your code here
-      # Here's where you will add some code to rollback on failure  
+      - destroy-environment 
 
 
 workflows:
