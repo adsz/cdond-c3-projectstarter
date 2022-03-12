@@ -315,7 +315,7 @@ jobs:
           name: Get backend url
           command: |
               find . -type f -name inventory.txt
-              export BACKEND_IP=$(cat project/.circleci/ansible/inventory.txt)
+              export BACKEND_IP=$(cat ./.circleci/ansible/inventory.txt)
               
       - run:
           name: Backend smoke test.
