@@ -332,6 +332,10 @@ jobs:
           command: |
               apk add --update curl aws-cli
       - run:
+          name: Show inventory.txt from workspace
+          command: |
+            cat ~/inventory.txt
+      - run:
           name: Get backend url
           command: |
               # find . -type f -name inventory.txt -exec cat {} \;
