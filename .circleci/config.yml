@@ -166,13 +166,13 @@ jobs:
           command: |
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text >> inv.txt
+                  --output text >> inventory.txt
                   # --output text >> ~/inv.txt
       - persist_to_workspace:
           root: .
           paths:
             # - project/.circleci/ansible/inventory.txt
-            - inv.txt
+            - inventory.txt
       - destroy-environment     
   show-workspace-data:
     docker:
@@ -189,7 +189,7 @@ jobs:
             # cat inventory.txt
             # pwd
             # find / -name inventory.txt
-            cat ~/data/inv.txt
+            cat ~/data/inventory.txt
 
   configure-infrastructure:
     docker:
@@ -212,7 +212,7 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
+            ansible-playbook -i ~/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment       
   run-migrations:
     docker:
@@ -317,7 +317,7 @@ jobs:
               tar -C backend -czvf artifact.tar.gz .
               cd .circleci/ansible
               echo "Contents  of the inventory.txt file is -------"
-              cat inventory.txt
+              cat ~/inventory.txt
       - destroy-environment  
   smoke-test:
     docker:
@@ -334,8 +334,8 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              find . -type f -name inventory.txt -exec cat {} \;
-              export BACKEND_IP=$(cat .circleci/ansible/inventory.txt)
+              # find . -type f -name inventory.txt -exec cat {} \;
+              export BACKEND_IP=$(cat ~/inventory.txt)
       - run:
           name: Backend smoke test.
           command: |
@@ -378,17 +378,17 @@ workflows:
           #     only: [test-feature-branch]
       - show-workspace-data:
           requires: [deploy-infrastructure]
-      # - configure-infrastructure:
-      #     requires: [deploy-infrastructure]
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
-      # - deploy-frontend:
-      #     requires: [run-migrations]
-      # - deploy-backend:
-      #     requires: [run-migrations]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      - deploy-frontend:
+          requires: [run-migrations]
+      - deploy-backend:
+          requires: [run-migrations]
       
-      # - smoke-test:
-      #     requires: [deploy-backend, deploy-frontend]
+      - smoke-test:
+          requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
       #     requires: [smoke-test]
       # - cleanup:
