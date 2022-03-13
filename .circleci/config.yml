@@ -338,11 +338,11 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              # find . -type f -name inventory.txt -exec cat {} \;
               export BACKEND_IP=$(cat ~/inventory.txt)
       - run:
           name: Backend smoke test.
           command: |
+              export BACKEND_IP=$(cat ~/inventory.txt)              
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
               if curl "${API_URL}/api/status" | grep "ok"
@@ -355,7 +355,7 @@ jobs:
       #     name: Frontend smoke test.
       #     command: |
             # your code here
-      - destroy-environment 
+      # - destroy-environment 
 
 
 workflows:
