@@ -169,8 +169,8 @@ jobs:
                   --output text >> inventory.txt
 
       - persist_to_workspace:
-        root: ~
-        paths:
+          root: ~
+          paths:
             - project/.circleci/ansible/inventory.txt
             # - inventory.txt
       - destroy-environment     
