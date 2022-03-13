@@ -334,11 +334,11 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              export BACKEND_IP=$(cat ~/inventory.txt)
+              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)
       - run:
           name: Backend smoke test.
           command: |
-              export BACKEND_IP=$(cat ~/inventory.txt)              
+              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)              
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
               if curl "${API_URL}/api/status" | grep "ok"
