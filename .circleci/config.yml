@@ -166,17 +166,11 @@ jobs:
           command: |
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text >> project/.circleci/ansible/inventory.txt
-              # pwd
-              # find / -name dupa.txt
-              # cat /root/project/.circleci/ansible/inventory.txt
-              # echo "==============================================="
-              # cat /root/project/dupa.txt
-
+                  --output text >> .circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: /~
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - .circleci/ansible/inventory.txt
             # - inventory.txt
       - destroy-environment     
   show-workspace-data:
@@ -190,10 +184,6 @@ jobs:
       - run:
           name: Show inventory.txt from workspace
           command: |
-            # cat .circleci/ansible/inventory.txt
-            # cat inventory.txt
-            # pwd
-            # find / -name inventory.txt
             cat ~/data/inventory.txt
 
   configure-infrastructure:
