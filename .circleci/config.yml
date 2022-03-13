@@ -164,7 +164,7 @@ jobs:
       - run:
           name: Add back-end ip to ansible inventory
           command: |
-              echo [web] > inventory.txt
+              echo [web] > ~/inventory.txt
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
                   --output text >> ~/inventory.txt
@@ -172,7 +172,6 @@ jobs:
           root: ~/
           paths:
             - inventory.txt
-            # - inventory.txt
       - destroy-environment     
   show-workspace-data:
     docker:
@@ -207,6 +206,8 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
+            cat ~/workspace/inventory.txt
+            echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
             ansible-playbook -i ~/workspace/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment       
   run-migrations:
