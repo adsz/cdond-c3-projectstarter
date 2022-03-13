@@ -170,7 +170,8 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            # - project/.circleci/ansible/inventory.txt
+            - inv.txt
       - destroy-environment     
   show-workspace-data:
     docker:
@@ -183,10 +184,11 @@ jobs:
       - run:
           name: Show inventory.txt from workspace
           command: |
-            cat .circleci/ansible/inventory.txt
-            cat inventory.txt
-            pwd
-            find / -name inventory.txt
+            # cat .circleci/ansible/inventory.txt
+            # cat inventory.txt
+            # pwd
+            # find / -name inventory.txt
+            cat ~/inv.txt
 
   configure-infrastructure:
     docker:
