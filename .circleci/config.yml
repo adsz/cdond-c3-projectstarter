@@ -199,7 +199,7 @@ jobs:
       - add_ssh_keys:
                 fingerprints: ["e2:98:99:89:88:9c:29:34:9b:c0:64:f4:68:da:6b:c88"] 
       - attach_workspace:
-            at: ~/      
+            at: ~/workspace      
       # - run:
       #     name: Install Ansible
       #     command: |
@@ -212,7 +212,7 @@ jobs:
       - run:
           name: Run Playbook and Configure server
           command: |
-            ansible-playbook -i ~/inventory.txt .circleci/ansible/configure-server.yml
+            ansible-playbook -i ~/workspace/inventory.txt .circleci/ansible/configure-server.yml
       - destroy-environment       
   run-migrations:
     docker:
