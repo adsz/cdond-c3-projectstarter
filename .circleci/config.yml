@@ -374,7 +374,8 @@ workflows:
           # filters:
           #   branches:
           #     only: [test-feature-branch]
-      - show-workspace-data
+      - show-workspace-data:
+          requires: [deploy-infrastructure]
       - configure-infrastructure:
           requires: [deploy-infrastructure]
       - run-migrations:
