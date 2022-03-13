@@ -166,12 +166,13 @@ jobs:
           command: |
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text >> inventory.txt
+                  --output text >> dupa.txt
               pwd
-              find / -name inventory.txt
+              find / -name dupa.txt
               cat /root/project/.circleci/ansible/inventory.txt
               echo "==============================================="
-              cat /root/project/inventory.txt
+              cat /root/project/dupa.txt
+
 
       - persist_to_workspace:
           root: /~
