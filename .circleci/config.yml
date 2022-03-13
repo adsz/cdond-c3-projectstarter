@@ -166,9 +166,10 @@ jobs:
           command: |
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text >> ~/inv.txt
+                  --output text >> inv.txt
+                  # --output text >> ~/inv.txt
       - persist_to_workspace:
-          root: ~/
+          root: .
           paths:
             # - project/.circleci/ansible/inventory.txt
             - inv.txt
@@ -180,7 +181,7 @@ jobs:
       - checkout 
       - run: yum install -y tar gzip
       - attach_workspace:
-            at: ~/      
+            at: ~/data      
       - run:
           name: Show inventory.txt from workspace
           command: |
@@ -188,7 +189,7 @@ jobs:
             # cat inventory.txt
             # pwd
             # find / -name inventory.txt
-            cat ~/inv.txt
+            cat ~/data/inv.txt
 
   configure-infrastructure:
     docker:
