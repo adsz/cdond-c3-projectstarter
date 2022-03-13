@@ -184,6 +184,9 @@ jobs:
           name: Show inventory.txt from workspace
           command: |
             cat .circleci/ansible/inventory.txt
+            cat inventory.txt
+            pwd
+            find / -name inventory.txt
 
   configure-infrastructure:
     docker:
