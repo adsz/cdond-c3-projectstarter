@@ -169,6 +169,9 @@ jobs:
                   --output text >> inventory.txt
               pwd
               find / -name inventory.txt
+              cat /root/project/.circleci/ansible/inventory.txt
+              echo "==============================================="
+              cat /root/project/inventory.txt
 
       - persist_to_workspace:
           root: /~
