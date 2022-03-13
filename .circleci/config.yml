@@ -294,7 +294,7 @@ jobs:
           name: Install dependencies
           command: |
               curl -sL https://rpm.nodesource.com/setup_lts.x | bash -
-              yum -y install nodejs ansible
+              yum -y install nodejs
               npm install -g npm
               npm install oauth2
               npm install webpack
@@ -302,6 +302,8 @@ jobs:
           name: Install awscli
           command: |
               yum install -y awscli
+              amazon-linux-extras install epel
+              yum install -y ansible
       - run:
           name: Deploy backend
           command: |
