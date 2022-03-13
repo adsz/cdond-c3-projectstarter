@@ -302,7 +302,7 @@ jobs:
           name: Install awscli
           command: |
               yum install -y awscli
-              sudo amazon-linux-extras install epel
+              amazon-linux-extras install epel -y
               yum update -y
               yum install -y ansible
       - run:
