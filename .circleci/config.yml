@@ -346,6 +346,7 @@ jobs:
       - run:
           name: Backend smoke test.
           command: |
+              curl www.wp.pl
               export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)              
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
