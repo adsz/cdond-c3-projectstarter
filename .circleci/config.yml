@@ -314,9 +314,10 @@ jobs:
               cd ..
               # Zip the directory
               tar -C backend -czvf artifact.tar.gz .
+              ls -l artifact.tar.gz
               echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
               pwd
-              find / -name artifact.tar.gz
+              # find / -name artifact.tar.gz
               # cd .circleci/ansible
               # echo "Contents  of the inventory.txt file is -------"
               # cat ~/inventory.txt
