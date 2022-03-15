@@ -348,7 +348,7 @@ jobs:
           command: |
               export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)              
               export API_URL=http://${BACKEND_IP}:3030
-              echo Backend URL => ${API_URL}/api/status
+              echo Backend URL: ${API_URL}/api/status
               if curl ${API_URL}/api/status | grep "ok"
               then
                   return 0
@@ -360,8 +360,8 @@ jobs:
       - run:
           name: Frontend smoke test.
           command: |
-              URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website-eu-central-1.amazonaws.com/#/employees            
-              echo Frontend URL => ${URL} 
+              URL=http://udapeople-${CIRCLE_WORKFLOW_ID:0:7}.s3-website.eu-central-1.amazonaws.com/#/employees            
+              echo Frontend URL: ${URL} 
               if curl -s ${URL} | grep "Welcome"
               then
                   # Change this to 0 after the job fails
