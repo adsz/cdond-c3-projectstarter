@@ -349,6 +349,7 @@ jobs:
               export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)              
               export API_URL=http://${BACKEND_IP}:3030
               echo Backend URL: ${API_URL}/api/status
+              curl -v ${API_URL}/api/status
               if curl ${API_URL}/api/status | grep "ok"
               then
                   return 0
