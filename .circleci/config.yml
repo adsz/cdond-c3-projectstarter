@@ -358,9 +358,8 @@ jobs:
                   return 1
               fi
       - revert-migrations:
-          event: on_fail
       - destroy-environment:
-          event: on_fail 
+
 
       - run:
           name: Frontend smoke test.
@@ -376,9 +375,8 @@ jobs:
                 return 1
               fi
       - revert-migrations:
-          event: on_fail
       - destroy-environment:
-          event: on_fail 
+
 
 
 workflows:
