@@ -357,8 +357,9 @@ jobs:
               else
                   return 1
               fi
-      - revert-migrations
       - destroy-environment
+      - revert-migrations
+
 
 
       - run:
@@ -374,8 +375,9 @@ jobs:
               else
                 return 1
               fi
-      - revert-migrations
       - destroy-environment
+      - revert-migrations
+
 
 
 
