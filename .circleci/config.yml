@@ -174,7 +174,7 @@ jobs:
           root: ~/
           paths:
             - inventory.txt
-      - destroy-environment:
+      - destroy-environment
   show-workspace-data:
     docker:
       - image: amazon/aws-cli
