@@ -1,6 +1,6 @@
 URL01 https://github.com/adsz/cdond-c3-projectstarter
-URL02 
-URL03
+URL02 https://udapeople-351423a.s3.amazonaws.com/index.html#/employees
+URL03 https://dnwz8qasmtmvf.cloudfront.net/#/employees
 URL04
 URL05
 
