@@ -3,3 +3,14 @@ URL02
 URL03
 URL04
 URL05
+
+
+udapeople-udapeople-kk1j287dhjppmz2022.s3.amazonaws.com
+udapeople-kk1j287dhjppmz2022
+<Error>
+<Code>NoSuchBucket</Code>
+<Message>The specified bucket does not exist</Message>
+<BucketName>udapeople-udapeople-kk1j287dhjppmz2022</BucketName>
+<RequestId>TJHQF7NZ323BFGA0</RequestId>
+<HostId>XMLpnXrJaOkw+eSFNnmmpA9Zd1EI96NiSUZwkq0xVxoONl9bJKEsU7ZnGCoXnOOMPoJSSSR4gyY=</HostId>
+</Error>
