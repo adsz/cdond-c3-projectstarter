@@ -4,6 +4,11 @@ URL03
 URL04
 URL05
 
+S3 bucket for start
+udapeople-kk1j287dhjppmz777
+
+
+
 
 udapeople-udapeople-kk1j287dhjppmz2022.s3.amazonaws.com
 udapeople-kk1j287dhjppmz2022
@@ -14,3 +19,5 @@ udapeople-kk1j287dhjppmz2022
 <RequestId>TJHQF7NZ323BFGA0</RequestId>
 <HostId>XMLpnXrJaOkw+eSFNnmmpA9Zd1EI96NiSUZwkq0xVxoONl9bJKEsU7ZnGCoXnOOMPoJSSSR4gyY=</HostId>
 </Error>
+
+http://udapeople-97d2ca5.s3-website.eu-central-1.amazonaws.com
