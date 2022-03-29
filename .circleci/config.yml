@@ -420,16 +420,24 @@ jobs:
               # export OldWorkflowID=$(aws cloudformation \
               # list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
               # --no-paginate --output text)
+
               export OldWorkflowID=$(cat ~/OldWorkflowID.txt)
               echo OldWorkflowID "${OldWorkflowID}"
               echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
+
               # Fetch the stack names          
               # export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
               # --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
               # echo Stack names: "${STACKS[@]}" 
-      # - run:
-      #     name: Remove old stacks and files
-      #     command: |
+      - run:
+          name: Remove old stacks and files
+          command: |
+              aws s3 rm "s3://udapeople-${OldWorkflowID}" --recursive
+              echo "Deleted old frontend s3 files: s3://udapeople-$OldWorkflowID"
+              aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID}"
+              echo "Deleted old backend stack: udapeople-backend-$OldWorkflowID"
+              aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
+              echo "Deleted old frontend stack: udapeople-frontend-$OldWorkflowID"
       #       if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
       #       then
       #         echo 
@@ -440,39 +448,80 @@ jobs:
 workflows:
   default:
     jobs:
-      # - build-frontend:
-      #     context:
-      #       - Slack
-      # - build-backend:
-      #    context:
-      #       - Slack
-      # - test-frontend:
-      #     requires: [build-frontend]
-      # - test-backend:
-      #     requires: [build-backend]
-      # - scan-backend:
-      #     requires: [build-backend]
-      # - scan-frontend:
-      #     requires: [build-frontend]
+      - build-frontend:
+          context:
+            - Slack
+          filters:
+            branches:
+              only: [dev-branch]      
+      - build-backend:
+          context:
+            - Slack
+          filters:
+            branches:
+              only: [dev-branch]
+      - test-frontend:
+          filters:
+            branches:
+              only: [dev-branch]
+          requires: [build-frontend]
+      - test-backend:
+          filters:
+            branches:
+              only: [dev-branch]
+          requires: [build-backend]
+      - scan-backend:
+          filters:
+            branches:
+              only: [dev-branch]
+          requires: [build-backend]
+      - scan-frontend:
+          filters:
+            branches:
+              only: [dev-branch]
+          requires: [build-frontend]
       - deploy-infrastructure
-          # requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          # filters:
-          #   branches:
-          #     only: [test-feature-branch]
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [master]
       - show-workspace-data:
           requires: [deploy-infrastructure]
+          filters:
+            branches:
+              only: [master]          
       - configure-infrastructure:
           requires: [deploy-infrastructure]
+          filters:
+            branches:
+              only: [master]
       - run-migrations:
           requires: [configure-infrastructure]
+          filters:
+            branches:
+              only: [master]
       - deploy-frontend:
           requires: [run-migrations]
+          filters:
+            branches:
+              only: [master]
       - deploy-backend:
           requires: [run-migrations]
-      
+          filters:
+            branches:
+              only: [master]      
       - smoke-test:
           requires: [deploy-backend, deploy-frontend]
+          filters:
+            branches:
+              only: [master]
       - cloudfront-update:
           requires: [smoke-test]
+          filters:
+            branches:
+              only: [master]
       - cleanup:
           requires: [cloudfront-update]
+          filters:
+            branches:
+              only: [master]
