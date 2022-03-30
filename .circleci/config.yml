@@ -442,7 +442,7 @@ jobs:
               echo "Deleted old backend stack: udapeople-backend-${OldWorkflowID}"
               aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID}"
               echo "Deleted old frontend stack: udapeople-frontend-${OldWorkflowID}"
-      #       if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+      #       if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]] 
       #       then
       #         echo 
       #       fi
