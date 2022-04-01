@@ -209,6 +209,10 @@ jobs:
             cat ~/workspace/inventory.txt
             echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
             ansible-playbook -i ~/workspace/inventory.txt .circleci/ansible/configure-server.yml
+      - run:
+          name: Install node-explorer
+          command: |
+            ansible-playbook -i ~/workspace/inventory.txt .circleci/ansible/configure-prometheus-node-exporter.yml
       - destroy-environment       
   run-migrations:
     docker:
