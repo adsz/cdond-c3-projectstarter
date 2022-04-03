@@ -346,11 +346,11 @@ jobs:
       - run:
           name: Get backend url
           command: |
-              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)
+              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web | grep -v "3.67.207.248")
       - run:
           name: Backend smoke test.
           command: |
-              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web)              
+              export BACKEND_IP=$(cat ~/inventory.txt | grep -v web | grep -v "3.67.207.248")              
               export API_URL=http://${BACKEND_IP}:3030
               echo Backend URL: ${API_URL}/api/status
               sleep 60
