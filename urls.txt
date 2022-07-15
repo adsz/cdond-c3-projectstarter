@@ -1,5 +1,5 @@
 URL01 https://github.com/adsz/cdond-c3-projectstarter
-URL02 http://udapeople-2ab1bdf.s3-website.eu-central-1.amazonaws.com/#/employees
+URL02 http://udapeople-03e0a7e.s3-website.eu-central-1.amazonaws.com/#/employees
 URL03 http://dnwz8qasmtmvf.cloudfront.net/#/employees
-URL04 http://ec2-35-159-26-19.eu-central-1.compute.amazonaws.com:3030/api/status
-URL05 http://ec2-3-67-207-248.eu-central-1.compute.amazonaws.com:9090/targets
+URL04 http://ec2-3-127-234-96.eu-central-1.compute.amazonaws.com:3030/api/status
+URL05 http://ec2-18-198-22-115.eu-central-1.compute.amazonaws.com:9090/targets
