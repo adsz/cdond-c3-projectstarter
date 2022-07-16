@@ -159,14 +159,14 @@ jobs:
           command: |
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text
+                  --output text | grep -v "18.198.22.115"
       - run:
           name: Add back-end ip to ansible inventory
           command: |
               echo [web] > ~/inventory.txt
               aws ec2 describe-instances \
                   --query 'Reservations[*].Instances[*].PublicIpAddress' \
-                  --output text >> ~/inventory.txt
+                  --output text | grep -v "18.198.22.115" >> ~/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -270,7 +270,7 @@ jobs:
           command: |
               export BACKEND_IP=$(aws ec2 describe-instances \
               --query "Reservations[*].Instances[*].PublicIpAddress" \
-              --output=text)
+              --output=text | grep -v "18.198.22.115")
               export API_URL="http://${BACKEND_IP}:3030"
               echo "${API_URL}"
               echo API_URL="http://${BACKEND_IP}:3030" >> frontend/.env
